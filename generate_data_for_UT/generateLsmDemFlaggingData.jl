@@ -39,9 +39,8 @@ dem_gridpoints = dem["digital_elevation_model"][start_pos_grid:start_pos_grid+n_
 l0_nscans = 23
 nav_status = zeros(Int16, l0_nscans)
 pos_lat = rand(minimum(lat1_lsm):maximum(lat1_lsm),n_fovs,l0_nscans)
-include("../algorithms/LsmDemFlagging.jl")
-dict_lsm = computeLongitudes(n_lon_inlat_lsm, lon1_lsm, lat1_lsm)
-dict_dem = computeLongitudes(n_lon_inlat_dem, lon1_dem, lat1_dem)
 pos_lon = rand(0:360.0, n_fovs, l0_nscans)
 
-flag = lsm_dem_flagging()
+result = lsm_dem_flagging(n_fovs, resol, flag_lsm, n_lat, n_lon_inlat_lsm, n_gridpoints_lsm,
+lat1_lsm,lon1_lsm,lsm_gridpoints,flag_dem,n_lat,n_lon_inlat_dem,n_gridpoints_dem,
+lat1_dem,lon1_dem, dem_gridpoints, l0_nscans, pos_lat, pos_lon, nav_status)
